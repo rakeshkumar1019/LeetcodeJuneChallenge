@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+#include<iostream>
+using namespace std;
+class Node{
+  public:
+   Node* left;
+   Node* right;
+   int data;
+};
+Node* newNode(int data){
+  Node* temp=new Node();
+  temp->data=data;
+  temp->left=temp->right=NULL;
+  return temp;
+}
+void preOrdered(Node * root){
+  if(root){
+    cout<<root->data<<" ";
+    preOrdered(root->left);
+    preOrdered(root->right);
+  }
+}
+void mirror(Node* root){
+  if(root==NULL){
+    return;
+  }
+  mirror(root->left);
+  mirror(root->right);
+  Node* temp=root->left;
+  root->left=root->right;
+  root->right=temp;
+}
+Node* invertTree(Node* root){
+  mirror(root);
+  return root;
+}
+ 
+int main(){
+  Node* root=new Node();
+  root=newNode(4);
+  root->left=newNode(2);
+  root->right=newNode(7);
+  root->left->left=newNode(1);
+  root->left->right=newNode(3);
+  root->right->left=newNode(6);
+  root->right->right=newNode(9);
+  preOrdered(root);
+  invertTree(root);
+  cout<<endl;
+  preOrdered(root);
+}
