@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> temp;
+    
+int binarySearch(int val){
+    int l=0;
+    int mid;
+    int h=temp.size()-1;
+    while(l<h){
+        mid=(l+h)/2;
+        if(val>temp[mid]){
+            l=mid+1;
+        }else{
+            h=mid;
+        }
+    }
+    return l;
+}
+   
+    Solution(vector<int>& w) {
+          int sum=0;
+         for(int i=0;i<w.size();i++){
+             sum+=w[i];
+          temp.push_back(sum);
+         }
+    }
+    
+    int pickIndex() {
+        int val=rand() % temp.back()+1;
+        return binarySearch(val);
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(w);
+ * int param_1 = obj->pickIndex();
+ */
